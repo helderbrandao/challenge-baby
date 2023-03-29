@@ -1,11 +1,12 @@
 var babies = require("../sources/babies.json");
-var constants = require("../const/babies.js");
+var constants = require("../constants/babies.js");
 
-// public
-exports.getBabiesByYear = function(year) {
 
-}
-
+/**
+ * Get All Babies by filter
+ * @param filter
+ * @returns {({}|*[])[keyof {}|*[]][]|*[]}
+ */
 exports.getBabiesByFilter = function(filter) {
     let babies = this.getAllBabies();
 
@@ -23,14 +24,28 @@ exports.getBabiesByFilter = function(filter) {
         .value();
 }
 
+/**
+ * Get All Babies Birth of Years
+ * @param filter
+ * @returns {*[]}
+ */
 exports.getBabiesAllBirthYears = function (filter = {}) {
     return this.getAllBabiesByProperty(constants.YEAR_OF_BIRTH, filter);
 }
 
+/**
+ * Get All Babies Ethnic
+ * @param filter
+ * @returns {*[]}
+ */
 exports.getBabiesAllEthnic = function (filter = {}) {
     return this.getAllBabiesByProperty(constants.ETHNICITY, filter);
 }
 
+/**
+ * Get All Babies datasource
+ * @returns {{}|*[]}
+ */
 exports.getAllBabies = function() {
     return babies || [];
 }
