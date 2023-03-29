@@ -1,0 +1,21 @@
+{
+  "name": "challenge_server",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "cors": "latest",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "http-proxy": "1.18.1",
+    "jade": "~1.11.0",
+    "lodash": "^4.17.21",
+    "morgan": "~1.9.1",
+    "react-icons": "^4.8.0",
+    "request": "^2.88.2"
+  }
+}

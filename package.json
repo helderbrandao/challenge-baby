@@ -1,0 +1,17 @@
+{
+  "name": "challenge-baby",
+  "description": "challenge-baby package.json",
+  "version": "1.0.0",
+  "author": "Hélder Brandão",
+  "private": true,
+  "main": "./challenge/bin/www",
+  "license": "UNLICENSED",
+  "scripts": {
+    "client": "cd ./challenge_client && npm start",
+    "server": "cd ./challenge_server && npm start",
+    "start": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.1"
+  }
+}
