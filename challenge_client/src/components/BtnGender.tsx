@@ -16,7 +16,7 @@ interface Props {
 
 interface GenderProps {
     label: string,
-    icon: String
+    icon: string
 }
 
 
