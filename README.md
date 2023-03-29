@@ -1,4 +1,4 @@
-# Challenge Babt
+# Challenge Baby
 
 ### `npm start`
 
