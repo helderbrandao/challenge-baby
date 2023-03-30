@@ -1,17 +1,51 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Button, {GENDER} from "./components/BtnGender";
+import BtnGender, {GENDER} from "./components/BtnGender";
 import Card from 'react-bootstrap/Card';
+import {FormSelect} from "react-bootstrap";
 
 
 function App() {
-  const handleCallback = (data : string[]) => {
+
+  const selInput = useRef(null);
+
+
+  const handleCallback = (selGender:string, data : []) => {
     //alert(`NAME FOR YOUR BABY IS ${data[3].toUpperCase()}`);
+    //console.log(data);
+    setGender(selGender)
+    setEthnics(data);
+    setOptEthnics();
+  }
+
+  const setOptEthnics = () => {
+    return ethnics.map((ethnic) => {
+      return <option value={ethnic}>{ethnic}</option>;
+    });
+  }
+
+  const handleShowBabyName = (data : string[] ) => {
     setResult(data.length > 0 ? `${data[3].toUpperCase()}`: "");
   }
 
+  const handleClick = () => {
+    fetch('http://localhost:8080/names/' + gender + '/ethnic/' + ethnic)
+        .then(response => response.json())
+        .then(data => handleShowBabyName(data));
+  }
+
+  const handleChange = (e : object) => {
+    debugger;
+    let select = selInput.current;
+    if(select != null)
+      setEthnic(select["value"]);
+  }
+
   const [result, setResult] = useState("");
+  const [gender, setGender] = useState("");
+  const [ethnics , setEthnics] = useState([]);
+  const [ethnic , setEthnic] = useState("");
 
   return (
     <div className="App">
@@ -21,7 +55,7 @@ function App() {
           Choose a gender to give you a baby name
         </p>
         <span style={{"display": "inline"}}>
-          <Button
+          <BtnGender
               parentCallback = {handleCallback}
               border="none"
               color="darkviolet"
@@ -32,7 +66,7 @@ function App() {
               margin = "0 20px 0 0"
           />
 
-          <Button
+          <BtnGender
               parentCallback = {handleCallback}
               border="none"
               color="blue"
@@ -40,9 +74,22 @@ function App() {
               gender={GENDER.MALE}
               radius = "50%"
               width = "100px"
-              margin=""
+              margin = "0 20px 0 0"
           />
+
+          <button onClick={handleClick}>GENERATE</button>
         </span>
+
+        <select
+            ref={selInput}
+            className="form-control"
+            aria-label="Floating label select example"
+            onChange={handleChange}>
+          <option defaultValue="-1" disabled selected>
+            -- Select Ethnic --
+          </option>
+          {setOptEthnics()}
+        </select>
         <Card style={{ width: '18rem', marginTop: '2rem' }}>
           <Card.Img variant="top" src="img.png" />
           <Card.Body>

@@ -1,22 +1,28 @@
 var mBaby = require("../models/babies");
 
-exports.getBabyName = function(gender) {
+exports.getBabyName = function(filter) {
     //Get Year Randomly
     let years = mBaby.getBabiesAllBirthYears();
     let year = _.sample(years);
 
     //Get Etnic Randomly
-    let etnics = mBaby.getBabiesAllEthnic({"year": year});
-    let etnic = _.sample(etnics);
+    if(!filter.ethnic) {
+        let ethnics = mBaby.getBabiesAllEthnic({"year": year});
+        let ethnic = _.sample(ethnics);
+    }
 
     //Construct filter
-    let filter = {
-        "gender": gender,
+    filter = {
+        "gender": filter.gender,
         "year": year,
-        "etnic": etnic,
+        "etnic": filter.ethnic || ethnic,
         "rank": "1"
     }
 
     //Get All Babies by Gender and By Year
     return mBaby.getBabiesByFilter(filter)[0] || [];
+}
+
+exports.getAllEthnicsByGender = function(gender) {
+    return _.uniq(mBaby.getBabiesAllEthnic({"gender": gender}));
 }

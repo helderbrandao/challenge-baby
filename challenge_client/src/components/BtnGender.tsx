@@ -3,15 +3,16 @@ import * as FaIcons from "react-icons/fa";
 import {FaMars, FaVenus} from "react-icons/fa";
 
 interface Props {
-    parentCallback: (data: string[]) => void,
-    border: string;
-    color: string;
+    border: string,
     children?: React.ReactNode;
-    height: string;
+    color: string;
     gender: GenderProps;
-    radius: string
-    width: string;
+    height: string;
     margin: string;
+    parentCallback: (arg0: string,
+                     data: []) => void
+    radius: string;
+    width: string;
 }
 
 interface GenderProps {
@@ -43,9 +44,10 @@ const Button: React.FC<Props> = ({
                                      margin
                                  }) => {
     const handleClick = () => {
-        fetch('http://localhost:8080/names/' + gender.label)
+        fetch('http://localhost:8080/ethnics/' + gender.label)
             .then(response => response.json())
-            .then(data => parentCallback(data));
+            .then(data => parentCallback(gender.label, data));
+        //parentCallback(gender.label);
     }
 
     //TODO: I did this hack because I had type error
