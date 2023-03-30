@@ -8,8 +8,11 @@
   "license": "UNLICENSED",
   "scripts": {
     "client": "cd ./challenge_client && npm start",
+    "build-client": "cd ./challenge_client && npm install",
     "server": "cd ./challenge_server && npm start",
-    "start": "concurrently \"npm run server\" \"npm run client\""
+    "build-server": "cd ./challenge_server && npm install",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "build-all": "concurrently \"npm run build-server\" \"npm run build-client\""
   },
   "devDependencies": {
     "concurrently": "^8.0.1"
